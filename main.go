@@ -1,6 +1,7 @@
 package main
 
 /*
+#include <stdlib.h>
 #include "formatsql.h"
 */
 import "C"
@@ -9,6 +10,7 @@ import (
     "log"
     "net/http"
     "os"
+    "unsafe"
     "io/ioutil"
 )
 
@@ -19,7 +21,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusBadRequest)
         return
     }
-    w.Write([]byte(C.GoString(C.formatSqlC(C.CString(string(b))))))
+    cs := C.CString(string(b))
+    defer C.free(unsafe.Pointer(cs))
+
+    formatResult := C.formatSqlC(cs)
+    defer C.free(unsafe.Pointer(formatResult))
+
+    w.Write([]byte(C.GoString(formatResult)))
 }
 
 func main() {
@@ -34,4 +42,3 @@ func main() {
 
     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
-
