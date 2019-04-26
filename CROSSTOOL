@@ -1,0 +1,12 @@
+default_toolchain {
+  cpu: "k8"
+  toolchain_identifier: "x86_64-linux-gnu"
+}
+toolchain {
+  toolchain_identifier: "x86_64-linux-gnu"
+  host_system_name: "x86_64-linux-gnu"
+  target_system_name: "x86_64-linux-gnu"
+  target_cpu "k8"
+  target_libc: "local"
+  target_system_name: "local"
+}

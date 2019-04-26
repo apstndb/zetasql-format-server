@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "zetasql/parser/parser.h"
+#include "formatsql.h"
 
 std::string formatSql(std::string sql) {
   std::unique_ptr<zetasql::ParserOutput> parser_output;
@@ -11,13 +12,9 @@ std::string formatSql(std::string sql) {
   return zetasql::Unparse(parser_output->statement());
 }
 
-int main(int argc, char *argv[]) {
-  // don't skip the whitespace while reading
-  std::cin >> std::noskipws;
-
-  // use stream iterators to copy the stream to a string
-  std::istream_iterator<char> it(std::cin);
-  std::istream_iterator<char> end;
-  std::string results(it, end);
-  std::cout << formatSql(results);
+char *formatSqlC(char* sql) {
+  const auto result = formatSql(std::string(sql));
+  char *c = (char *)malloc(result.length());
+  strcpy(c, result.c_str());
+  return c;
 }
