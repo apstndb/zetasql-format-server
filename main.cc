@@ -12,7 +12,12 @@ std::string formatSql(std::string sql) {
 }
 
 int main(int argc, char *argv[]) {
-  std::string query_string(argv[1]);
-  std::cout << formatSql(query_string);
-}
+  // don't skip the whitespace while reading
+  std::cin >> std::noskipws;
 
+  // use stream iterators to copy the stream to a string
+  std::istream_iterator<char> it(std::cin);
+  std::istream_iterator<char> end;
+  std::string results(it, end);
+  std::cout << formatSql(results);
+}
