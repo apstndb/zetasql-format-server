@@ -4,9 +4,7 @@ RUN wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24
 # RUN git clone https://github.com/google/zetasql.git
 RUN mkdir /work
 WORKDIR /work
-COPY CROSSTOOL WORKSPACE BUILD /work/
-RUN bazel build '@com_google_zetasql//zetasql/parser:parser'
-COPY formatsql.cc formatsql.h main.go /work/
+COPY CROSSTOOL WORKSPACE BUILD formatsql.cc formatsql.h main.go /work/
 RUN bazel build ...
 ENTRYPOINT ["/workbazel-bin/linux_amd64_stripped/zetasql-server"]
 
