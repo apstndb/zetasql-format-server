@@ -1,5 +1,5 @@
 FROM marketplace.gcr.io/google/bazel:latest AS build-env
-RUN apt-get update && apt-get install --no-install-recommends -y bison flex libfl-dev
+RUN apt-get update && apt-get install --no-install-recommends -y bison flex
 RUN mkdir /work
 WORKDIR /work
 COPY CROSSTOOL WORKSPACE BUILD formatsql.cc formatsql.h main.go /work/
