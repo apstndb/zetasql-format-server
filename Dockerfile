@@ -1,8 +1,10 @@
 FROM marketplace.gcr.io/google/bazel:latest AS build-env
-RUN apt-get update && apt-get install --no-install-recommends -y bison flex
-RUN mkdir /work
+# use gcc because clang can't build m4
+RUN apt-get update && apt-get install --no-install-recommends -y make g++
+ENV CC /usr/bin/gcc
 WORKDIR /work
 COPY CROSSTOOL WORKSPACE BUILD formatsql.cc formatsql.h main.go /work/
+COPY bazel/* /work/bazel/
 RUN bazel build \
   --incompatible_disable_deprecated_attr_params=false \
   --incompatible_string_join_requires_strings=false \
@@ -14,6 +16,5 @@ RUN bazel build \
   ...
 
 FROM gcr.io/distroless/cc
-# FROM marketplace.gcr.io/google/ubuntu1604:latest
 COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
 ENTRYPOINT ["./zetasql-server"]

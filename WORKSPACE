@@ -1,13 +1,31 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+   name = "rules_foreign_cc",
+   strip_prefix = "rules_foreign_cc-e3f4b5e0bc9dac9cf036616c13de25e6cd5051a2",
+   urls = [
+      "https://github.com/bazelbuild/rules_foreign_cc/archive/e3f4b5e0bc9dac9cf036616c13de25e6cd5051a2.tar.gz",
+   ],
+   sha256 = "136470a38dcd00c7890230402b43004dc947bf1e3dd0289dd1bd2bfb1e0a3484"
+)
+
+load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
+
+rules_foreign_cc_dependencies()
+
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-git_repository(name = "com_google_zetasql", remote = "https://github.com/apstndb/zetasql.git", commit = "a7485ba1e180b2c1330dc57c2d061faffea6b984")
+
+http_archive(
+   name = "com_google_zetasql",
+   strip_prefix = "zetasql-2019.07.1",
+   urls = [
+      "https://github.com/google/zetasql/archive/2019.07.1.tar.gz",
+   ],
+   sha256 = "88871fe511cce67e86321f9eb69cd8f81218a9415f41dff36b066a23b483bf06"
+)
 
 load("@com_google_zetasql//:zetasql_deps.bzl", "zetasql_deps")
 zetasql_deps()
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
-grpc_deps()
-load("@io_grpc_grpc_java//:repositories.bzl", "grpc_java_repositories")
-grpc_java_repositories()
 
 http_archive(
     name = "io_bazel_rules_go",
