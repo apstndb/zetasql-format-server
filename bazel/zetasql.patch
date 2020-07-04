@@ -1,0 +1,35 @@
+--- zetasql/resolved_ast/BUILD
++++ zetasql/resolved_ast/BUILD
+@@ -16,7 +16,7 @@
+
+ load("//zetasql/resolved_ast:build_rules.bzl", "gen_resolved_ast_files")
+
+-package(default_visibility = ["//:__subpackages__"])
++package(default_visibility = ["//visibility:public"])
+
+ py_binary(
+     name = "gen_resolved_ast",
+
+--- zetasql/proto/BUILD
++++ zetasql/proto/BUILD
+@@ -15,7 +15,7 @@
+ #
+
+ # Package for non-public protos.
+-package(default_visibility = ["//:__subpackages__"])
++package(default_visibility = ["//visibility:public"])
+
+ proto_library(
+     name = "options_proto",
+
+--- zetasql/public/proto/BUILD
++++ zetasql/public/proto/BUILD
+@@ -13,7 +13,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+-package(default_visibility = ["//:__subpackages__"])
++package(default_visibility = ["//visibility:public"])
+
+ filegroup(
+     name = "type_annotation_filegroup",
