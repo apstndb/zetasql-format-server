@@ -11,7 +11,7 @@ http_archive(
       "https://github.com/google/zetasql/archive/2020.06.1.tar.gz",
    ],
    sha256 = "fb82060f525177117181dfad1a629d1dc13f76dd5779e5a393d6405fb627100c",
-   patches = ["@com_github_apstndb_zetasql_format_server//bazel:zetasql.patch"],
+#   patches = ["@com_github_apstndb_zetasql_format_server//bazel:zetasql.patch"],
 )
 
 load("@com_google_zetasql//bazel:zetasql_deps_step_1.bzl", "zetasql_deps_step_1")
