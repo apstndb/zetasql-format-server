@@ -1,4 +1,4 @@
-FROM ubuntu:focal AS build-env
+FROM ubuntu:bionic AS build-env
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates gnupg
 RUN curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
