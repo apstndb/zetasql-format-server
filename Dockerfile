@@ -2,8 +2,9 @@ FROM ubuntu:focal AS build-env
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates gnupg
 RUN curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
-RUN apt-get update && apt-get install --no-install-recommends -y make g++ bazel git python3
+RUN apt-get update && apt-get install --no-install-recommends -y make g++ bazel-1.0.1 git python3
 
+RUN update-alternatives --install /usr/bin/bazel bazel /usr/bin/bazel-1.0.1 100
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100
 
 WORKDIR /work
