@@ -9,7 +9,7 @@ It is GoogleSQL(BigQuery, Cloud Spanner) dialect format server using [ZetaSQL](h
 ## Usage
 
 ```sh
-$ SERVICE_URL=$(gcloud beta run services describe --format="value(status.domain)" ${REPO_NAME})
+$ SERVICE_URL=$(gcloud beta run services describe --format="value(status.address.url)" ${REPO_NAME})
 $ curl ${SERVICE_URL} --data 'SELECT * FROM tbl'
 SELECT
   *
